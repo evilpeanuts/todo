@@ -1,0 +1,250 @@
+*{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	background: #F5F5F5;
+	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.bj{
+	background: #F5F5F5;
+	height: 373px;
+	margin: auto;
+}
+.k{
+	width: 550px;
+	height: auto;
+	position: absolute;
+	margin: auto;
+	left: 0;
+	top: 115px;
+	right: 0;
+	z-index: 10;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+.todos{
+	width: 550px;
+	height: auto;
+	position: absolute;
+	margin: auto;
+	left: 0;
+	top: 0;
+	right: 0;
+}
+.todos h1{
+	font-size: 100px;
+	font-weight: 100;
+	color: rgba(175, 47, 47, 0.15);
+	text-align: center;
+}
+.shuru{
+	width: 550px;
+	height: auto;
+	z-index: 10;
+	border-right: 1px solid #DADADA;
+	border-left: 1px solid #DADADA;
+	border-top: 1px solid #f1f1f1;
+}
+.shuru #qx{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border:1px solid #ededed;
+	padding: 0;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background: #fff;
+	font-size: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #ccc;
+	-webkit-appearance: none;
+}
+.shuru #qx::after{
+	content: "﹀";
+	color:#d9d9d9;
+}
+.shuru #qx:checked::after{
+	content: "﹀";
+	color: #737379;
+}
+.shuru input{
+	width: 476px;
+	height: 33px;
+	padding:13px  13px 13px 60px ;
+	background: #fff;
+	border: 2px;
+	font-size: 24px;
+	color: #000;
+	border:0;
+	outline-style: none;
+	border-bottom: 2px solid #E6E6E6;
+}
+.shuru ul li{
+	width: 550px;
+	height: 65px;
+	background: #fff;
+	border: 2px;
+	font-size: 24px;
+	color: #000;
+	border:0;
+	outline-style: none;
+	border-bottom: 1px solid #E6E6E6;
+}
+.shuru .yuan{
+	padding: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #fff;
+	border:1px solid #ededed;
+	display: inline-block;
+	float: left;
+	margin-left: 10px;
+	margin-top: 12px;
+	font-size: 30px;
+	line-height: 40px;
+	text-align: center;
+	color: #777;
+	-webkit-appearance: none;
+}
+.yuan:checked::after{
+	content: '√'
+}
+.shuru ul li label{
+	width: 430px;
+	height: 40px;
+	font-size: 30px;
+	background: #fff;
+	float: left;
+	margin-left: 10px;
+	margin-top: 12px;
+	padding: 0;
+	border-bottom: 0;
+	color:#000;
+}
+.shuru ul li .you{
+	width: 40px;
+	height: 40px;
+	float: left;
+	padding: 0;
+	margin-left: 10px;
+	border-radius: 50%;
+	border:1px solid #ededed;
+	background: #fff;
+	margin-top: 12px;
+	font-size: 30px;
+	line-height: 40px;
+	text-align: center;
+	color: #777;
+	display: none;
+}
+.shuru ul li:hover div .you{
+	display: block;
+}
+.shuangji .emid{
+	display: block;
+}
+.shuangji div{
+	display: none;
+}
+.shuru ul .danji label{
+	color: #d9d9d9;
+	text-decoration:line-through;
+}
+.emid{
+	width: 430px;
+	height: 40px;
+	float: left;
+	margin-top: 5px;
+	padding: 0;
+	border-bottom: 0;
+	display: none;
+}
+.xia{
+	width: 550px;
+	height: 50px;
+	z-index: 3;
+	border-right: 1px solid #DADADA;
+	background:#fff;
+	border-left: 1px solid #DADADA;
+	border-bottom: 1px solid #d2d2d2;
+}
+.xia span{
+	width: 69px;
+	height: 19px;
+	color: #777;
+	background: #fff;
+	text-align: left;
+	float: left;
+	margin-left: 10px;
+	color: #777;
+	margin-top: 15px;
+}
+.xiaz{
+	margin-left: 100px;
+	float: left;
+	background: #fff;
+}
+.xiaz li{
+	background: #fff;
+	float: left;
+	margin-top: 15px;
+}
+.xiaz li:hover a{
+	border:1px solid #F7EAEA;
+}
+.xiaz li a{
+	border:1px solid #fff;
+    border-radius: 3px;
+	background: #fff;
+	color: #777;
+    margin: 4px;
+    padding: 3px 7px;
+    text-decoration: none; 
+    font-size: 14px; 
+}
+.button{
+	display: inline-block;
+	background: #fff;
+	float:right;
+	margin-top: 15px;
+	margin-right: 20px;
+	display: none;
+}
+.btn{
+	display: block;
+}
+.button input{
+	background: #fff;
+	border:0;
+	color:#777;
+	cursor: pointer;
+}
+
+.yi{
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}
+.yinc{
+	display: none;
+}
+.xiaz li .dianji{
+	border:1px solid #d2d2d2;
+}
+.wenzi{
+	position: absolute;
+	margin:auto;
+	left: 0;
+	right: 0;
+	bottom:-100px;
+	width: 550px;
+	height: 50px;
+	background: transparent;
+	text-align: center;
+}
+.wenzi span,a{
+	background: transparent;
+	text-decoration: none;
+	color: #d9d9d9;
+	font-size: 12px;
+}
