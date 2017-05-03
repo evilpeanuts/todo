@@ -61,12 +61,13 @@
 	-webkit-appearance: none;
 }
 .shuru #qx::after{
-	content: "﹀";
-	color:#d9d9d9;
+	content: "❯";
+	font-size: 22px;
+	color: rgb(230, 230, 230);
+	padding: 10px 15px;
 }
 .shuru #qx:checked::after{
-	content: "﹀";
-	color: #737379;
+	color: #737373;
 }
 .shuru input{
 	width: 476px;
@@ -201,8 +202,8 @@
 	color: #777;
     margin: 4px;
     padding: 3px 7px;
-    text-decoration: none; 
-    font-size: 14px; 
+    text-decoration: none;
+    font-size: 14px;
 }
 .button{
 	display: inline-block;

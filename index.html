@@ -2,52 +2,189 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>TODO</title>
-	<link rel="stylesheet" href="css/index.css">
+	<title>todo</title>
+	<link rel="stylesheet" href="css/css.css">
 </head>
+<style>
+
+</style>
 <body>
-	<div class="bj">
-		<div class="todos">
+	<div class="todo">
+		<header id="header">
 			<h1>todos</h1>
-		</div>
-		<div class="k">
-			<div class="shuru">
-				<input type="checkbox"id='qx'>
-				<input id="diyi"type="text" placeholder="What needs to be done?">
-				<ul>
-				</ul>
-			</div>
-			<div class="yi yinc">
-					<div class="xia">
-						<span>0 items left</span>
-						<ul class="xiaz">
-							<li>
-								<a href="#" class="dianji">All</a>
-							</li>
-							<li>
-								<a href="#">Active</a>
-							</li>
-							<li>
-								<a href="#">Completed</a>
-							</li>
-						</ul>
-						<div class="button">
-							<input type="button" value="Clear completed">
-						</div>	
+			<input type="text" placeholder="What needs to be done?">
+		</header>
+		<div class="main">
+			<input type="checkbox" id="toggle-all">
+			<ul id="todo-list">
+				<!-- <li>
+					<div class="view">
+						<input type="checkbox" class="toggle">
+						<span>sdfgh</span>
 					</div>
-					<div class="wenzi">
-						<span>Double-click to edit a todo</span><br>
-						<span>Created by</span>
-						<a href="#"> Sindre Sorhus</a>
-						<br>
-						<span>Part of </span>
-						<a href="#"> TodoMVC</a>
-					</div>
-			</div>
+				</li> -->
+			</ul>
 		</div>
-		
+        <footer id="footer">
+            <span class="todo-count">
+                <strong></strong>
+                items left
+            </span>
+            <!-- button# -->
+            <ul id="filter">
+                <li><a data-role="All" href="">All</a></li>
+                <li><a href="" data-role="Active">Active</a></li>
+                <li><a href="" data-role="Completed">Completed</a></li>
+            </ul>
+            <span class="clear-completed">Clear completed</span>
+        </footer>
 	</div>
-<script src="js/jquery-1.12.0.js"></script>
-<script src="js/index.js"></script>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+        $(function(){
+        	var content;
+        	var headerInput=$('#header input');
+        	var todoList=$('#todo-list');
+        	var val;
+          var toggleAll=$('#toggle-all');
+            // var footer=$('#footer')
+            // var filter=$('#filter')
+
+
+        	if(localStorage.data){
+        		content=JSON.parse(localStorage.data);
+        	}else{
+        		content=[]
+        	}
+            var storage=function(){
+                localStorage.data = JSON.stringify(content);
+            }
+            $('.todo-count strong').html(content.length)
+        	var render=function(){
+                var state=localStorage.state||'all'
+                var ftodo=$.grep(content,function(v){
+                    if(state==='All'){
+                        return v
+                    }else if(state==='Active'){
+                        return !v.isDone
+                    }else if(state==='Completed'){
+                        return v.isDone
+                    }
+                })
+                todoList.empty().append(function(){
+                    return $.map(ftodo,function(v){
+                        var tmp=v.isDone?'completed':'';
+                        // console.log(tmp)
+                        var tmb=v.isDone?'checked':'';
+                        return  '<li id="'+v.id+'" class="'+tmp+'"><div class="view"><input '+tmb+' type="checkbox" '+tmb+' class="toggle"><span>'+v.text+'</span><div class="delete"></div></div><input type="text" class="edit" value="'+v.text+'"></li>'
+                    })
+                    $('#filter a.selected').removeClass('selected')
+                    $('#filter a[data-role='+state+']').addClass('selected')
+                })
+                toggle()
+            }
+            render();
+            var addHandel=function(e){
+                todos=(localStorage.data)?JSON.parse(localStorage.data):[];
+                val=headerInput.val().trim();
+                var id=content.length?content[content.length-1].id+1:1;
+                var _d={id:id,text:val,isDone:false}
+                if(e.keyCode!==13||val===''){
+                    return;
+                }
+                content.push(_d);
+                storage()
+                render();
+                $(this).val('')
+            }
+            var deleteHandel=function(id){
+                var id=Number($(this).closest('li').attr('id'));
+                content=$.grep(content,function(v){
+                    return v.id!==id;
+                })
+                storage()
+                render();
+            }
+            var toggleAllHandel=function(){
+                var state=$(this).prop('checked');
+                $.grep(content,function(v){
+                    return v.isDone=state;
+                })
+                storage()
+                render()
+            }
+            var editHandel=function(){
+                var tmp=$(this).html();
+                $(this).closest('li')
+                .addClass('editing')
+                .find('.edit').val(tmp)
+                .focus()
+                return false;
+            }
+
+            function toggle(){
+                var xtodo=$.grep(content,function(v){
+                    return v.isDone
+                })
+                if(content.length===xtodo.length){
+                    toggleAll.attr('checked',true)
+                }else{
+                    toggleAll.attr('checked',false)
+                }
+                $('.todo-count strong').text(content.length-xtodo.length)
+            }
+
+            var updateState=function(){
+                var state=$(this).prop('checked');
+                console.log(state)
+                var id=parseInt($(this).closest('li').attr('id'));
+                $(content).each(function(i,v){
+                 if(v.id===id){
+                     v.isDone=state;
+                 }
+             })
+                storage()
+                render()
+
+
+            }
+            var updateContent=function(){
+                var id=parseInt($(this).closest('li').attr('id'));
+                var val=$(this).val();
+                $(content).each(function(i,v){
+                    if(v.id===id){
+                        v.text=val;
+                    }
+                })
+                storage();
+                render()
+            }
+            var filterHandel=function(){
+                $('#filter a.selected').removeClass('selected')
+                $(this).addClass('selected')
+                    localStorage.state=$(this).attr('data-role')
+                render()
+                return false;
+            }
+                headerInput.on('keyup',addHandel)
+                todoList.on('click','.toggle',updateState)
+                todoList.on('click','.delete', deleteHandel)
+                toggleAll.on('click',toggleAllHandel);
+                todoList.on('dblclick','li span',editHandel)
+                todoList.on('change','.edit',updateContent)
+                todoList.on('focusout','.edit',function(){
+                    $(this).closest('li').removeClass('editing')
+                })
+                $('#filter').on('click','a',filterHandel)
+                $('.clear-completed').on('click',function(){
+                    content=$.grep(content,function(v){
+                        return v.isDone=false;
+                    })
+                    storage()
+                    render()
+                })
+
+        })
+	</script>
 </body>
 </html>
